@@ -1,9 +1,3 @@
-<div align="center">
-  <img src="public/assets/logo.png" alt="Project Logo" style="border-radius: 8px;" width="100" />
-</div>
-
-This project is a basic template for creating **Google Chrome extensions** using **Vite**, **TypeScript**, and **Tailwind CSS**. It provides a modular and organized base to help you start building your own extension efficiently.
-
 ## Prerequisites
 
 Before you begin, make sure you have the following installed:

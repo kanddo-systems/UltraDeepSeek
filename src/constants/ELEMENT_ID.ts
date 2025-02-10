@@ -1,0 +1,1 @@
+export const DELETE_BUTTON_ID = "home_delete_button";

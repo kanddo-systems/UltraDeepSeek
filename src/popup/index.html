@@ -5,11 +5,23 @@
 <body>
   <div id="app" class="w-96 mx-auto p-4">
     <div class="flex flex-col items-center justify-center space-y-8">
-      <h1 class="text-4xl font-extrabold text-gray-900">Welcome to x10</h1>
-      <p class="text-xl text-gray-600">Experience the future of extensions</p>
+      <h1 class="text-4xl font-extrabold text-gray-900">Ultra DeepSeek</h1>
+      <p class="text-md text-gray-600">You deserve full control over your DeepSeek chats</p>
       <div class="flex space-x-4">
-        <button class="px-6 py-2 bg-yellow-600 text-white rounded-full hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:ring-opacity-50">Login</button>
-        <button class="px-6 py-2 bg-gray-300 text-gray-900 rounded-full hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-opacity-50">Sign Up</button>
+        <div class="flex flex-col items-center space-y-2">
+          <button id="home_delete_button"
+            class="px-6 py-2 bg-indigo-600 text-white rounded-full hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:ring-opacity-50"
+            data-test-id="default">Delete</button>
+          <a href="#" class="flex row text-indigo-500">
+            Select All
+          </a>
+        </div>
+
+        <div>
+          <button id="home_favorite_button"
+            class="px-6 py-2 bg-gray-300 text-gray-900 rounded-full hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-opacity-50">Favorites</button>
+        </div>
+
       </div>
     </div>
   </div>
