@@ -1,4 +1,4 @@
-import { DELETE_BUTTON_ID } from './constants/ELEMENT_ID';
+import { DELETE_BUTTON_ID, SELECT_ALL_BUTTON_ID } from './constants/ELEMENT_ID';
 
 export const STORAGE_KEYS = {
     CHECKBOX: "ULTRA_DEEPSEEK_HAS_CHECKBOX",
@@ -6,6 +6,7 @@ export const STORAGE_KEYS = {
 };
 
 const getDeleteButton = () => document.getElementById(DELETE_BUTTON_ID);
+const getSelectAllButton = () => document.getElementById(SELECT_ALL_BUTTON_ID);
 
 const sendMessageToActiveTab = (action: string) => {
     chrome.tabs.query({ active: true, currentWindow: true }, ([tab]) => {
@@ -29,10 +30,13 @@ type ButtonStateKey = Exclude<keyof typeof BUTTON_STATES, 'selecting'>;
 
 const updateDeleteButton = (quantity: number) => {
     const deleteButton = getDeleteButton();
-    if (!deleteButton) return;
+    const selectAllButton = getSelectAllButton();
+
+    if (!deleteButton || !selectAllButton) return;
 
     if (quantity > 0) {
         setButtonState(deleteButton, BUTTON_STATES.selecting(quantity));
+        selectAllButton.classList.remove("hidden");
         return;
     }
 
@@ -40,21 +44,37 @@ const updateDeleteButton = (quantity: number) => {
         const nextState = ULTRA_DEEPSEEK_HAS_CHECKBOX ? BUTTON_STATES.default : BUTTON_STATES.waiting;
         setButtonState(deleteButton, nextState);
     });
+
 };
 
 const handleDeleteButtonClick = () => {
     const deleteButton = getDeleteButton();
-    if (!deleteButton) return;
+    const selectAllButton = getSelectAllButton();
+
+    if (!deleteButton || !selectAllButton) return;
 
     const currentTestId = deleteButton.getAttribute("data-test-id") as ButtonStateKey | "selecting";
-    const nextState = currentTestId === "selecting"
-        ? BUTTON_STATES.selecting(0)
-        : BUTTON_STATES[currentTestId];
+    let nextState;
 
-    if (!nextState) return;
+    if (currentTestId === "selecting") {
+        nextState = BUTTON_STATES.selecting(0);
+    } else if (BUTTON_STATES[currentTestId]) {
+        nextState = BUTTON_STATES[currentTestId];
+    } else {
+        return;
+    }
 
+    updateSelectAllButtonVisibility(selectAllButton, nextState.testId);
     setButtonState(deleteButton, nextState);
     sendMessageToActiveTab(nextState.action);
+};
+
+const updateSelectAllButtonVisibility = (button: HTMLElement, testId: string) => {
+    if (testId === "default") {
+        button.classList.add("hidden");
+    } else if (testId === "waiting") {
+        button.classList.remove("hidden");
+    }
 };
 
 const setButtonState = (button: HTMLElement, state: { text: string; testId: string; action: string }) => {
