@@ -14,9 +14,9 @@
     "action": {
         "default_popup": "src/popup/index.html",
         "default_icon": {
-            "16": "/assets/logo.png",
-            "48": "/assets/logo.png",
-            "128": "/assets/logo.png"
+            "16": "/assets/deepseek-logo.png",
+            "48": "/assets/deepseek-logo.png",
+            "128": "/assets/deepseek-logo.png"
         }
     },
     "content_scripts": [
@@ -30,8 +30,8 @@
         }
     ],
     "icons": {
-        "16": "/assets/logo.png",
-        "48": "/assets/logo.png",
-        "128": "/assets/logo.png"
+        "16": "/assets/deepseek-logo.png",
+        "48": "/assets/deepseek-logo.png",
+        "128": "/assets/deepseek-logo.png"
     }
 }
