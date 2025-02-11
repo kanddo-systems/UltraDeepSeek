@@ -33,6 +33,14 @@ class Extension {
             }
             UIService.setupDeleteButton(deleteButton);
         }
+
+        chrome.runtime.onMessage.addListener((message) => {
+            if (message.action === "FINISH_PROCESS" && message.payload === "DELETE") {
+                if (!deleteButton) return;
+                UIService.changeDeleteButtonToDefaultState(deleteButton);
+                window.close();
+            }
+        });
     }
 }
 

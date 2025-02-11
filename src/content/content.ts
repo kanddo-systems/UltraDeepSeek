@@ -54,6 +54,10 @@ const cleanCheckboxState = async () => {
     await updateStorageKey(STORAGE_KEYS.CHECKBOX, false);
 }
 
+const sendFinishProcessMessage = () => {
+    chrome.runtime.sendMessage({ action: "FINISH_PROCESS", payload: "DELETE" });
+}
+
 const updateSelectedChats = (container: HTMLElement, isChecked: boolean) => {
     isChecked ? selectedChats.add(container) : selectedChats.delete(container);
     updateStorageKey(STORAGE_KEYS.QUANTITY, selectedChats.size);
@@ -79,8 +83,29 @@ const removeCheckboxesFromChats = () => {
     selectedChats.clear();
 };
 
-const deleteSelectedChats = () => {
-    console.log("[ULTRA DEEPSEEK] deleteMarkCheckboxes", selectedChats);
+const deleteSelectedChats = async () => {
+    for (const chat of selectedChats) {
+        const thirdChild = chat.children[2] as HTMLElement;
+        if (thirdChild) {
+            await thirdChild.click();
+            await new Promise(resolve => setTimeout(resolve, 500));
+
+            const deleteChat = document.querySelector("div.ds-dropdown-menu-option.ds-dropdown-menu-option--error");
+            if (deleteChat) {
+                await (deleteChat as HTMLElement).click();
+            }
+            await new Promise(resolve => setTimeout(resolve, 500));
+
+
+            const confirmDeleteModal = document.querySelector("div.ds-modal-content__footer > div > div.ds-button.ds-button--error.ds-button--filled.ds-button--rect.ds-button--m");
+            if (confirmDeleteModal) {
+                await (confirmDeleteModal as HTMLElement).click();
+            }
+        }
+    }
+    cleanCheckboxState();
+    removeCheckboxesFromChats();
+    sendFinishProcessMessage();
 };
 
 const debouncedMutationHandler = debounce(() => {
@@ -93,6 +118,7 @@ const observer = new MutationObserver(() => {
 
 const init = async () => {
     await getOrCreateStorage();
+    cleanCheckboxState();
     updateNavbarState();
 
     observer.observe(document.body, { childList: true, attributes: true, subtree: true });

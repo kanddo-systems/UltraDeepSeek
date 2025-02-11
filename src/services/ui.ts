@@ -6,6 +6,11 @@ export class UIService {
         return document.getElementById(DELETE_BUTTON_ID);
     }
 
+    static changeDeleteButtonToDefaultState(deleteButton: HTMLElement): void {
+        deleteButton.setAttribute("data-test-id", "default_state");
+        deleteButton.innerText = "Delete";
+    }
+
     static changeDeleteButtonToWaitingState(deleteButton: HTMLElement): void {
         deleteButton.setAttribute("data-test-id", "waiting_state");
         deleteButton.innerText = "Cancel";
@@ -13,7 +18,7 @@ export class UIService {
 
     static changeDeleteButtonToCoutingState(deleteButton: HTMLElement, count: number): void {
         deleteButton.setAttribute("data-test-id", "selecting_state");
-        deleteButton.innerText = `Selected ${count} chats`;
+        deleteButton.innerText = `Delete ${count} Selected Chats`;
     }
 
     static changeDeleteButtonToLoadingState(deleteButton: HTMLElement): void {
@@ -34,8 +39,7 @@ export class UIService {
                 (deleteButton as HTMLButtonElement).disabled = true;
             } else {
                 TabService.sendMessageToActiveTab("remove_checkbox_in_chats");
-                deleteButton.setAttribute("data-test-id", "default_state");
-                deleteButton.innerText = "Delete";
+                UIService.changeDeleteButtonToDefaultState(deleteButton);
             }
         });
     }
