@@ -1,22 +1,32 @@
+<div align="center" style="border-radius: 8px;">
+  <img src="public/assets/deepseek-logo.png" alt="Project Logo" style="border-radius: 8px;" width="100" />
+</div>
+
+# Ultra DeepSeek
+
+## Overview
+
+**Ultra DeepSeek** is a Chrome extension designed to enhance and organize the DeepSeek experience. It provides improved search capabilities, structured data visualization, and better accessibility features, allowing users to streamline their research workflow within DeepSeek.
+
 ## Prerequisites
 
-Before you begin, make sure you have the following installed:
+Before setting up the project, ensure you have the following installed:
 
 - **Node.js** (recommended v14 or higher)
 - **npm** or **yarn** (package manager)
 - **Vite** (for building and development)
-- **Google Chrome** to test the extension
+- **Google Chrome** (for testing the extension)
 
 ## Setting Up the Project
 
-1. **Clone or download the repository**:
+1. **Clone the repository**:
 
    ```bash
-   git clone https://github.com/your-username/your-repository.git
-   cd your-repository
+   git clone https://github.com/your-username/ultra-deepseek.git
+   cd ultra-deepseek
    ```
 
-2. **Install the dependencies**:
+2. **Install dependencies**:
 
    If using `npm`:
 
@@ -31,82 +41,80 @@ Before you begin, make sure you have the following installed:
    ```
 
 3. **Vite Configuration**:
-   
-   Vite is already set up for TypeScript and Tailwind. The build and development process is optimized, and you can customize it as needed.
+
+   Vite is pre-configured for TypeScript and Tailwind. The build process is optimized, but you can customize it as needed.
 
 ## Folder Structure
 
-The project is organized as follows:
+The project follows this structure:
 
 ```
 /public
   /assets
     logo.png      # Project logo (shown in the README)
 /manifest.json     # Chrome extension configuration
-  index.html      # Base HTML file for the extension
 /src
+  /background     # Background script (service worker)
   /content        # Content script that interacts with the pages
   /popup          # Popup of the extension, where the UI is rendered
   /styles         # Styles (using Tailwind CSS)
-  /background.ts  # Background script (service worker)
+  /popup
+      index.html      # Base HTML file for the extension
 /vite.config.ts   # Vite configuration
-
 ```
 
-- **`/public`**: Contains public files for the extension, like the logo and base HTML file.
-- **`/src`**: Contains TypeScript files (background, content script, popup) and CSS/Tailwind.
+- **`/public`**: Contains public assets like the logo and base HTML file.
+- **`/src`**: Holds TypeScript files for the background script, content scripts, and popup.
 - **`vite.config.ts`**: Vite configuration file.
-- **`manifest.json`**: Configuration file for the Chrome extension.
+- **`manifest.json`**: Chrome extension manifest file.
 
-## Testing the Extension
+## Running the Extension
 
-### 1. **Running the Project in Development Mode**
+### 1. **Development Mode**
 
-During development, you can run the extension locally. To do so, use the following command:
+To run the extension in development mode, use:
 
 ```bash
 npm run dev
 ```
 
-Or, if you're using `yarn`:
+Or with `yarn`:
 
 ```bash
 yarn dev
 ```
 
-This will start Vite in development mode, and you can see the extension in the browser by going to `chrome://extensions/`.
+This starts Vite in development mode. Load the extension manually in Chrome:
 
-### 2. **Building the Extension for Production**
+1. Navigate to `chrome://extensions/`
+2. Enable **Developer mode** (top-right corner)
+3. Click **Load unpacked**
+4. Select the **`dist/`** folder
 
-Once you're done with development and want to test the final version of the extension, you need to build it. Run the following command:
+### 2. **Building for Production**
+
+When ready to deploy, build the production version with:
 
 ```bash
 npm run build
 ```
 
-Or, if you're using `yarn`:
+Or with `yarn`:
 
 ```bash
 yarn build
 ```
 
-This will create the production-ready version of the extension in the **`dist/`** folder. You’ll need to manually load this folder in **Google Chrome** to test the extension.
+This generates a `dist/` folder with the production-ready extension.
 
-### 3. **Loading the Extension in Chrome**
+### 3. **Testing and Debugging**
 
-1. Go to `chrome://extensions/` in Google Chrome.
-2. Enable **Developer mode** in the top-right corner.
-3. Click on **"Load unpacked"**.
-4. Select the **`dist/`** folder that was generated after the build.
-5. Your extension will now be available for testing directly in the browser.
+After loading the extension, interact with the popup or content script. Debug using Chrome DevTools:
 
-### 4. **Testing and Debugging**
-
-After loading the extension, you can click on the extension's icon in the browser to interact with the popup or the content script. You can also inspect the background script and popup through the Chrome developer tools.
-
-- To open the background console, go to `chrome://extensions/`, find your extension, and click on **"service worker"** to inspect the background script.
-- To inspect the popup, click on the extension icon and use the **Inspect popup** option in the extension menu.
+- **Background script**: Go to `chrome://extensions/`, locate the extension, and open the **service worker console**.
+- **Popup debugging**: Click the extension icon and inspect it using **Inspect popup**.
 
 ## License
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more information.
+Ultra DeepSeek is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
