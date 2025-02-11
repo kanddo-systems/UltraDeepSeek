@@ -4,8 +4,6 @@
 
 # Ultra DeepSeek
 
-## Overview
-
 **Ultra DeepSeek** is a Chrome extension designed to enhance and organize the DeepSeek experience. It provides improved search capabilities, structured data visualization, and better accessibility features, allowing users to streamline their research workflow within DeepSeek.
 
 ## Prerequisites
