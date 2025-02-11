@@ -5,24 +5,29 @@
 <body>
   <div id="app" class="w-96 mx-auto p-4">
     <div class="flex flex-col items-center justify-center space-y-8">
+     
       <h1 class="text-4xl font-extrabold text-gray-900">Ultra DeepSeek</h1>
       <p class="text-md text-gray-600">You deserve full control over your DeepSeek chats</p>
-      <div class="flex space-x-4">
+      
+      <p id="wrong_page_text" class="text-base bold text-red-600 hidden">Please open the <a class="underline text-indigo-900" href="https://chat.deepseek.com/" target="_blank">DeepSeek</a> website to continue.</p>
+      <p id="open_the_menu_text" class="text-sm bold text-indigo-500 hidden">Please open to DeepSeek menu to continue.</p>
+     
+      <div id="button_container" class="flex space-x-4 hidden">
         <div class="flex flex-col items-center space-y-2">
           <button id="home_delete_button"
             class="px-6 py-2 bg-indigo-600 text-white rounded-full hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:ring-opacity-50"
-            data-test-id="default">Delete</button>
+            data-test-id="default_state">Delete</button>
           <a id="home_select_all_button" href="#" class="flex row text-indigo-500 hidden">
             Toggle Checkbox
           </a>
         </div>
 
         <div>
-          <button id="home_favorite_button"
-            class="px-6 py-2 bg-gray-300 text-gray-900 rounded-full hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-opacity-50">Favorites</button>
+          <button id="home_debug_button"
+            class="px-6 py-2 bg-gray-300 text-gray-900 rounded-full hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-opacity-50">DEBUG</button>
         </div>
-
       </div>
+
     </div>
   </div>
 </body>
